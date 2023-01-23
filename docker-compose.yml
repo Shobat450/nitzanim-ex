@@ -1,0 +1,24 @@
+version: '3'
+services:
+  drupal:
+    image: drupal
+    ports:
+      - "80:80"
+    networks:
+      - drupal
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=drupal
+      - POSTGRES_PASSWORD=drupal
+      - POSTGRES_DB=drupal
+  postgres:
+    image: postgres
+    networks:
+      - drupal
+    environment:
+      - POSTGRES_USER=drupal
+      - POSTGRES_PASSWORD=drupal
+      - POSTGRES_DB=drupal
+networks:
+  drupal:
+    driver: bridge
